@@ -1,6 +1,6 @@
 {
   "name": "generator-yo-polypodes",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Yeoman generator",
   "license": "BSD-2-Clause",
   "main": "app/index.js",
