@@ -36,11 +36,26 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
     {
         name: 'appName',
         message: 'What is your web site\'s name ?'
-    }];
+    },
+    {
+      type: 'confirm',
+      name: 'includeJQuery',
+      message: 'Would you like to include jQuery?',
+      default: true
+    },
+    {
+      type: 'confirm',
+      name: 'includeBootstrap',
+      message: 'Would you like to include Bootstrap?',
+      default: true
+    }
+    ];
 
     this.prompt(prompts, function (props) {
       this.someOption = props.someOption;
       this.appName = props.appName;
+      this.includeJQuery = props.includeJQuery;
+      this.includeBootstrap = props.includeBootstrap;
 
       done();
     }.bind(this));
@@ -50,8 +65,10 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
     this.mkdir(dir.base);
     this.mkdir(dir.src);
     this.mkdir(dir.src + '/js');
+    this.mkdir(dir.src + '/js/module');
     this.mkdir(dir.src + '/js/vendor');
     this.mkdir(dir.src + '/less');
+    this.mkdir(dir.src + '/less/module');
     this.mkdir(dir.src + '/layouts');
     this.mkdir(dir.src + '/layouts/default-partials');
   },
@@ -72,6 +89,7 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
 
     // javascript
     this.template('_main.js', dir.src + '/js/main.js', context);
+    this.copy('_foo.js', dir.src + '/js/module/foo.js');
 
     // jade
     this.copy('_index.jade', dir.src + '/index.jade');
@@ -81,7 +99,7 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
     this.template('__html-header.jade', dir.src + '/layouts/default-partials/_html-header.jade', context);
 
     // less
-    this.copy('__variables.less', dir.src + '/less/_variables.less');
+    this.copy('__variables.less', dir.src + '/less/module/_variables.less');
     this.copy('_style.less', dir.src + '/less/style.less');
   },
 

@@ -1,3 +1,5 @@
+var foo = require('./module/foo.js');
+
 /**
  * <%= site_name %>
  * @author  Les polypodes
@@ -15,6 +17,7 @@ var myApp = (function($, undefined){
      */
     var init = function(val){
         console.log(val);
+        foo();
     };
 
     /**
@@ -35,4 +38,4 @@ var myApp = (function($, undefined){
     };
 })(jQuery);
 
-myApp.init('it works');
+myApp.init('Don\'t Live with Broken Windows');
