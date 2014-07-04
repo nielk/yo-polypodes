@@ -49,11 +49,24 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
   scaffoldFolders: function () {
     this.mkdir(dir.base);
     this.mkdir(dir.src);
-    this.mkdir(dir.src + '/js');
-    this.mkdir(dir.src + '/js/vendor');
-    this.mkdir(dir.src + '/less');
+
+    // layouts
     this.mkdir(dir.src + '/layouts');
     this.mkdir(dir.src + '/layouts/default-partials');
+    this.mkdir(dir.src + '/layouts/home');
+
+    // blocks
+    this.mkdir(dir.src + '/blocks');
+    this.mkdir(dir.src + '/blocks/header');
+    this.mkdir(dir.src + '/blocks/footer');
+
+    // common
+    this.mkdir(dir.src + '/common');
+
+    // test
+    this.mkdir(dir.src + '/test');
+    this.mkdir(dir.src + '/test/visual'); // wraigth
+    this.mkdir(dir.src + '/test/unit'); // jasmine
   },
 
   copyMainFiles: function () {
@@ -71,18 +84,18 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
     this.copy('_package.json', dir.base + '/package.json');
 
     // javascript
-    this.template('_main.js', dir.src + '/js/main.js', context);
+    this.template('_main.js', dir.src + '/main.js', context);
 
     // jade
-    this.copy('_index.jade', dir.src + '/index.jade');
+    this.copy('_index.jade', dir.src + '/layouts/home/index.jade');
     this.copy('__default.jade', dir.src + '/layouts/_default.jade');
-    this.copy('__footer.jade', dir.src + '/layouts/default-partials/_footer.jade');
-    this.template('__header.jade', dir.src + '/layouts/default-partials/_header.jade', context);
+    this.copy('__footer.jade', dir.src + '/blocks/footer/_footer.jade');
+    this.template('__header.jade', dir.src + '/blocks/header/_header.jade', context);
     this.template('__html-header.jade', dir.src + '/layouts/default-partials/_html-header.jade', context);
 
     // less
-    this.copy('__variables.less', dir.src + '/less/_variables.less');
-    this.copy('_style.less', dir.src + '/less/style.less');
+    this.copy('__variables.less', dir.src + '/_variables.less');
+    this.copy('_style.less', dir.src + '/style.less');
   },
 
 });

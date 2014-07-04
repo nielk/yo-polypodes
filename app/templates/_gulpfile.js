@@ -24,10 +24,10 @@ var gulp = require('gulp'),
     jade        = require('gulp-jade'),
 
     // HTML validation
-    htmlvalidator       = require('gulp-w3cjs'),
+    htmlvalidator = require('gulp-w3cjs'),
 
     // For image files
-    changed = require('gulp-changed'),
+    changed  = require('gulp-changed'),
     imagemin = require('gulp-imagemin');
 
 
@@ -35,19 +35,19 @@ var gulp = require('gulp'),
 // Paths
 var paths = {
     base               : './',
-    build               : './assets',
+    build               : './build',
     src                 : './src',
     js                  : {
-        files               : ['./src/js/vendor/*.js','./src/js/*.js'],
+        files               : ['./src/vendor/*.js','./src/js/*.js'],
         output_min          : 'main.min.js',
-        dest                : './assets/js',
+        dest                : './build/js',
     },
     style               : {
-        files               : ['./src/less/*.less', '!./src/less/_*.less'],
-        watch               : './src/less/*.less',
+        files               : ['./src/style.less', '!./src/less/_*.less'],
+        watch               : ['./src/**/*.less', '!./src/vendor'],
         output              : 'style.css',
         output_min          : 'style.min.css',
-        dest                : './assets/css'
+        dest                : './build/css'
     },
     layout                : {
         files               : './src/*.jade',
@@ -60,9 +60,8 @@ var paths = {
     images              : {
         files               : './src/images/**/*',
         icons               : './src/favicons',
-        dest                : './assets/images'
+        dest                : './build/images'
     },
-
 };
 
 // The tasks
