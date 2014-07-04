@@ -19,8 +19,8 @@ var ModuleGenerator = yeoman.generators.NamedBase.extend({
     // @TODO write style.less add import
     var path = './integration/src/less/style.less';
     var file = this.readFileAsString(path);
-    var hook = '#===== module hook =====#';
-    this.write(path, file.replace(hook, '@import "./modules/'this.name'.less";' + '\n' + hook));
+    var hook = '// #===== module hook =====#';
+    this.write(path, file.replace(hook, '@import "./modules/' + this.name + '.less";' + '\n' + hook));
   }
 });
 

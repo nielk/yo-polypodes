@@ -1,15 +1,14 @@
 {
   "name": "generator-yo-polypodes",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Yeoman generator",
-  "license": "MIT",
+  "license": "BSD-2-Clause",
   "main": "app/index.js",
-  "repository": "nielk/generator-yo-polypodes",
-  "author": {
-    "name": "Alexandre Oger",
-    "email": "oger.alexandre@gmail.com",
-    "url": "https://github.com/nielk"
+  "repository": {
+    "type": "git",
+    "url": "nielk/generator-yo-polypodes"
   },
+  "author": "Alexandre Oger <oger.alexandre@gmail.com> (https://github.com/nielk)",
   "engines": {
     "node": ">=0.10.0"
   },
@@ -32,5 +31,8 @@
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

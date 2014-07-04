@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     concat      = require('gulp-concat'),
     filesize    = require('gulp-filesize'),
     uglify      = require('gulp-uglify'),
+    browserify  = require('gulp-browserify'),
 
     // For less-css files
     less        = require('gulp-less'),
@@ -30,7 +31,8 @@ var gulp = require('gulp'),
     changed  = require('gulp-changed'),
     imagemin = require('gulp-imagemin');
 
-
+    // For browserify
+    source = require('vinyl-source-stream');
 
 // Paths
 var paths = {
@@ -111,10 +113,19 @@ gulp.task('style', function () {
 );
 
 gulp.task('js', function() {
-    return gulp.src(paths.js.files)
+    return gulp.src(paths.js.main)
     .pipe(plumber())
-    .pipe(concat(paths.js.output_min))
-    .pipe(uglify()) // = concat+ugly
+    .pipe(browserify())
+    .pipe(gulp.dest(paths.js.dest))
+    .pipe(browserSync.reload({stream:true}));
+});
+
+gulp.task('jsmin', function() {
+    return gulp.src(paths.js.main)
+    .pipe(plumber())
+    .pipe(browserify())
+    .pipe(uglify())
+    .pipe(rename('main.min.js'))
     .pipe(gulp.dest(paths.js.dest))
     .pipe(browserSync.reload({stream:true}));
 });
@@ -175,8 +186,8 @@ gulp.task( 'watch', function () {
     gulp.watch( paths.images.files,     ['images'] );
     gulp.watch( paths.layout.watch,     ['templates'] );
     gulp.watch( paths.layout.output,    ['htmlvalidator'] );
-    gulp.watch( paths.js.files,         ['js'] );
+    gulp.watch( paths.js.files,         ['js', 'jsmin'] );
 });
 
-gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator', 'server', 'watch']);
-gulp.task('build', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator']);
+gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'jsmin', 'icons', 'touchicons', 'htmlvalidator', 'server', 'watch']);
+gulp.task('build', ['clean', 'images', 'templates', 'style', 'js', 'jsmin', 'icons', 'touchicons', 'htmlvalidator']);

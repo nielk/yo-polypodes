@@ -36,11 +36,26 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
     {
         name: 'appName',
         message: 'What is your web site\'s name ?'
-    }];
+    },
+    {
+      type: 'confirm',
+      name: 'includeJQuery',
+      message: 'Would you like to include jQuery?',
+      default: true
+    },
+    {
+      type: 'confirm',
+      name: 'includeBootstrap',
+      message: 'Would you like to include Bootstrap?',
+      default: true
+    }
+    ];
 
     this.prompt(prompts, function (props) {
       this.someOption = props.someOption;
       this.appName = props.appName;
+      this.includeJQuery = props.includeJQuery;
+      this.includeBootstrap = props.includeBootstrap;
 
       done();
     }.bind(this));
