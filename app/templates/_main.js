@@ -1,7 +1,7 @@
-var foo = require('./module/foo.js');
-
+var footer = require('./blocks/footer/footer.js');
+var jQuery = jQuery || null;
 /**
- * <%= site_name %>
+ * mon super site
  * @author  Les polypodes
  */
 var myApp = (function($, undefined){
@@ -17,7 +17,6 @@ var myApp = (function($, undefined){
      */
     var init = function(val){
         console.log(val);
-        foo();
     };
 
     /**
@@ -25,7 +24,7 @@ var myApp = (function($, undefined){
      * @return {[type]} [description]
      */
     var anotherFunction = function(){
-        // ...
+        console.log(footer() + 'blabla');
     };
 
     return {
@@ -33,9 +32,10 @@ var myApp = (function($, undefined){
             return init(val);
         },
         anotherFunction: function() {
-            return someFunction(); //some function made public
+            return anotherFunction(); //some function made public
         }
     };
 })(jQuery);
 
 myApp.init('Don\'t Live with Broken Windows');
+myApp.anotherFunction();

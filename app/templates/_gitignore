@@ -1,5 +1,12 @@
-node_modules
+# builded project
 build
+
+# external libraries & NodeJS dependencies
 src/vendors
-gulp
+node_modules
+
+# screenshots
+src/test/visual/shots
+
+# system files
 .DS_Store

@@ -6,33 +6,38 @@
 var gulp = require('gulp'),
 
     // Global tools
-    browserSync = require('browser-sync'),
-    gutil       = require('gulp-util'),
-    plumber     = require('gulp-plumber'),
-    rename      = require('gulp-rename'),
-    clean       = require('gulp-clean'),
-    concat      = require('gulp-concat'),
-    filesize    = require('gulp-filesize'),
-    uglify      = require('gulp-uglify'),
-    browserify  = require('gulp-browserify'),
+    browserSync   = require('browser-sync'),
+    gutil         = require('gulp-util'),
+    plumber       = require('gulp-plumber'),
+    rename        = require('gulp-rename'),
+    clean         = require('gulp-clean'),
+    concat        = require('gulp-concat'),
+    filesize      = require('gulp-filesize'),
+    uglify        = require('gulp-uglify'),
+    browserify    = require('gulp-browserify'),
 
     // For less-css files
-    less        = require('gulp-less'),
-    prefixer    = require('gulp-autoprefixer'),
-    uncss       = require('gulp-uncss'),
+    less          = require('gulp-less'),
+    prefixer      = require('gulp-autoprefixer'),
+    uncss         = require('gulp-uncss'),
 
     // For jade
-    jade        = require('gulp-jade'),
+    jade          = require('gulp-jade'),
 
     // HTML validation
     htmlvalidator = require('gulp-w3cjs'),
 
     // For image files
-    changed  = require('gulp-changed'),
-    imagemin = require('gulp-imagemin');
+    changed       = require('gulp-changed'),
+    imagemin      = require('gulp-imagemin'),
 
     // For browserify
-    source = require('vinyl-source-stream');
+    source = require('vinyl-source-stream'),
+
+    // For Jade module
+    path          = require('path'),
+    fs            = require('fs'),
+    es            = require('event-stream');
 
 // Paths
 var paths = {
@@ -40,7 +45,7 @@ var paths = {
     build               : './build',
     src                 : './src',
     js                  : {
-        files               : ['./src/vendor/*.js','./src/js/*.js'],
+        files               : ['./src/vendor/*.js','./src/**/*.js'],
         output_min          : 'main.min.js',
         dest                : './build/js',
     },
@@ -52,9 +57,9 @@ var paths = {
         dest                : './build/css'
     },
     layout                : {
-        files               : './src/*.jade',
+        files               : ['./src/layouts/**/*.jade', '!./src/layouts/*.jade', '!./src/layouts/default-partials/*.jade'],
         watch               : './src/**/*.jade',
-        dest                : './'
+        dest                : './build'
     },
     validator           : {
         watchables:         './*.html',
@@ -74,7 +79,7 @@ var paths = {
 gulp.task('server', function() {
     browserSync.init(null, {
         server: {
-            baseDir: './'
+            baseDir: paths.build
         }
     });
 });
@@ -135,12 +140,27 @@ gulp.task('jsmin', function() {
 // 2. Copy generated file to html destination
 // 3. Reload BS
 
+function getFolders(dir){
+    return fs.readdirSync(dir)
+        .filter(function(file){
+            if(file.indexOf('default-partials') > -1) return;
+            return fs.statSync(path.join(dir, file)).isDirectory();
+        });
+}
+
 gulp.task('templates', function() {
-    return gulp.src(paths.layout.files)
-    .pipe(plumber())
-    .pipe(jade({pretty : true}))
-    .pipe(gulp.dest(paths.base))
-    .pipe(browserSync.reload({stream:true}));
+    var folders = getFolders(paths.layout.folders);
+
+    var tasks = folders.map(function(folder) {
+        return gulp.src(path.join(paths.layout.folders, folder, '/*.jade'))
+            .pipe(plumber())
+            .pipe(jade({pretty : true}))
+            .pipe(rename(folder + '.html'))
+            .pipe(gulp.dest(paths.build))
+            .pipe(browserSync.reload({stream:true}));
+    });
+
+    return es.concat.apply(null, tasks);
 });
 
 

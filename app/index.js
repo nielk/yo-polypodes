@@ -100,9 +100,10 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
 
     // javascript
     this.template('_main.js', dir.src + '/main.js', context);
+    this.copy('_footer.js', dir.src + '/blocks/footer/footer.js');
 
     // jade
-    this.copy('_index.jade', dir.src + '/layouts/home/index.jade');
+    this.copy('_index.jade', dir.src + '/layouts/index/index.jade');
     this.copy('__default.jade', dir.src + '/layouts/_default.jade');
     this.copy('__footer.jade', dir.src + '/blocks/footer/_footer.jade');
     this.template('__header.jade', dir.src + '/blocks/header/_header.jade', context);
@@ -111,6 +112,7 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
     // less
     this.copy('__variables.less', dir.src + '/_variables.less');
     this.copy('_style.less', dir.src + '/style.less');
+    this.copy('_footer.less', dir.src + '/blocks/footer/footer.less');
   },
 
 });

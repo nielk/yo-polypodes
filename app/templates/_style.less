@@ -7,16 +7,6 @@
 
 
 //
-// Constantes
-// ==========================================================================
-
-// Colors
-// =====================================
-
-@bg : #bada55;
-@txt : #666;
-
-//
 // Imports
 // ==========================================================================
 
@@ -24,6 +14,7 @@
 // =====================================
 // ...
 
+<% if (includeBootstrap) { %>
 // Bootstrap
 // =====================================
 
@@ -77,30 +68,7 @@
 // Utility classes
 // @import "../vendors/bootstrap/less/utilities.less";
 // @import "../vendors/bootstrap/less/responsive-utilities.less";
-
-
-
-// Modules
-// =====================================
-//
-// @import "./modules/xxx.less";
-// #===== module hook =====#
-
-//
-// Grid settings
-// ==========================================================================
-
-@baseline: 20px;
-@grid-columns: 12;
-@grid-gutter-width: 30px;
-
-//
-// Tags, fonts, types and commons settings
-// ==========================================================================
-
-// Fonts
-// =====================================
-@import "fonts";
+<% } %>
 
 // Tags
 // =====================================
@@ -108,18 +76,17 @@
 * {
     font-weight: normal;
 }
-html {
-    background-color: @bg;
-}
+
 body {
-    background-color: #fff;
-    border-radius: 3px;
-    padding: 10px 20px;
+    background-color: @bg;
     color: @txt;
     font-family: sans-serif;
-    width: 70%;
-    margin: 100px auto 0 auto;
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
 }
 
+// Modules
+// =====================================
+//
+@import "./_variables.less";
+// @import "./common/fonts.less";
+@import "./blocks/footer/footer.less";
+// #===== module hook =====#
