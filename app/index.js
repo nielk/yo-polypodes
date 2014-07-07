@@ -26,6 +26,15 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
     });
   },
 
+  draw: function() {
+    this.log('    __               ___      _                       _');
+    this.log('   / /  ___  ___    / _ \\___ | |_   _ _ __   ___   __| | ___  ___');
+    this.log('  / /  / _ \\/ __|  / /_)/ _ \\| | | | | \'_ \\ / _ \\ / _` |/ _ \\/ __|');
+    this.log(' / /__|  __/\\__ \\ / ___/ (_) | | |_| | |_) | (_) | (_| |  __/\__ \\');
+    this.log(' \\____/\\___||___/ \\/    \\___/|_|\\__, | .__/ \\___/ \\__,_|\\___||___/');
+    this.log('                                |___/|_|');
+  },
+
   askFor: function () {
     var done = this.async();
 
