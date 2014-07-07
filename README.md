@@ -1,53 +1,81 @@
-# generator-yo-polypodes [![Build Status](https://secure.travis-ci.org/nielk/generator-yo-polypodes.png?branch=master)](https://travis-ci.org/nielk/generator-yo-polypodes)
+#Yo-polypodes
 
-> [Yeoman](http://yeoman.io) generator
+##What is Yo-polypodes?
+
+Yo-polypodes is a Yeoman generator. It helps you to kickstart  new projects. We built this specific generator to pair with our existing workflow (Gulp, and BEM structure).
 
 
-## Getting Started
+##Overview
 
-### What is Yeoman?
-
-Trick question. It's not a thing. It's this guy:
-
-![](http://i.imgur.com/JHaAlBJ.png)
-
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
-
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
-
-```bash
-$ npm install -g yo
+```
+- build/
+    - ...
+- src/
+    - style.less
+    - main.js
+    - layouts/
+        - default-partials/
+            - ...
+        - home/
+            - home.less
+            - home.js
+            - home.jade
+        - contact/
+            - contact.less
+            - contact.js
+            - contact.jade
+    - blocks/
+        - search/
+            - search.less
+            - search.js
+            - search.jade
+        - footer/
+            - footer.less
+            - footer.js
+            - footer.jade
+        - menu/
+            - menu.less
+            - menu.js
+            - menu.jade
+        - list/
+            - list.less
+            - list.js
+            - list.jade
+    - common/
+        - common.less
+        - common.js
+- test/
+	- visual/
+    	- configs/
+        	config.yaml
+        - javascript/
+        	snap.js
+    - unit/
 ```
 
-### Yeoman Generators
+##Getting Started
 
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
+###Install Yeoman
+`npm install -g yo`
 
-To install generator-yo-polypodes from npm, run:
+###Install Yo-polypodes generator
+`npm install -g generator-yo-polypodes`
 
-```bash
-$ npm install -g generator-yo-polypodes
+###Init a project
+Go to your project folder and run :
+`yo yo-polypodes`
+
+Voilà !
+
+###Available commands
+`yo yo-polypodes:modules moduleName`
+creates a BEM like module :
+```
+myModule/
+	myModule.js
+    myModule.jade
+    myModule.less
 ```
 
-Finally, initiate the generator:
+`yo yo-polypodes:regression ` launch css regression tool, you need to install wraith : https://github.com/BBC-News/wraith
 
-```bash
-$ yo yo-polypodes
-```
-
-Create module:
-
-```bash
-$ yo yo-polypodes:module moduleName
-```
-
-### Getting To Know Yeoman
-
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
-
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
-
-
-## License
-
-MIT
