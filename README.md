@@ -77,5 +77,5 @@ myModule/
     myModule.less
 ```
 
-`yo yo-polypodes:regression ` launch css regression tool, you need to install wraith : https://github.com/BBC-News/wraith
+`yo yo-polypodes:regression ` launches css regression tool, you need to install wraith : https://github.com/BBC-News/wraith
 
