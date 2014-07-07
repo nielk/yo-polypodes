@@ -1,5 +1,7 @@
 var footer = require('./blocks/footer/footer.js');
+// #===== module hook =====#
 var jQuery = jQuery || null;
+
 /**
  * mon super site
  * @author  Les polypodes

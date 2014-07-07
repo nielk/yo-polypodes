@@ -13,14 +13,19 @@ var ModuleGenerator = yeoman.generators.NamedBase.extend({
       module_name: this.name
     };
 
-    this.template('file.less', './integration/src/less/modules/' + this.name + '.less', context);
-    this.template('file.jade', './integration/src/layouts/modules/' + this.name + '.jade', context);
+    this.template('file.less', './integration/src/blocks/' + this.name + '/' + this.name + '.less', context);
+    this.template('file.jade', './integration/src/blocks/' + this.name + '/' + this.name + '.jade', context);
+    this.template('file.js', './integration/src/blocks/' + this.name + '/' + this.name + '.js', context);
 
     // @TODO write style.less add import
-    var path = './integration/src/less/style.less';
-    var file = this.readFileAsString(path);
-    var hook = '// #===== module hook =====#';
-    this.write(path, file.replace(hook, '@import "./modules/' + this.name + '.less";' + '\n' + hook));
+    var pathLess = './integration/src/style.less',
+        pathJS   = './integration/src/main.js',
+        fileLess     = this.readFileAsString(pathLess),
+        fileJS     = this.readFileAsString(pathJS),
+        hook     = '// #===== module hook =====#';
+
+    this.write(pathLess, fileLess.replace(hook, '@import "./modules/' + this.name + '.less";' + '\n' + hook));
+    this.write(pathJS, fileJS.replace(hook, 'var ' + this.name + ' = require(\'./blocks/' + this.name + '/' + this.name + '.js\');' + '\n' + hook));
   }
 });
 

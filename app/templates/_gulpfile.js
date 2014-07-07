@@ -48,6 +48,7 @@ var paths = {
         files               : ['./src/vendor/*.js','./src/**/*.js'],
         output_min          : 'main.min.js',
         dest                : './build/js',
+        main                : './src/main.js'
     },
     style               : {
         files               : ['./src/style.less', '!./src/less/_*.less'],
@@ -57,6 +58,7 @@ var paths = {
         dest                : './build/css'
     },
     layout                : {
+        folders             : './src/layouts/',
         files               : ['./src/layouts/**/*.jade', '!./src/layouts/*.jade', '!./src/layouts/default-partials/*.jade'],
         watch               : './src/**/*.jade',
         dest                : './build'
@@ -108,7 +110,7 @@ gulp.task('style', function () {
     .pipe(gulp.dest(paths.style.dest))
     .pipe(rename(paths.style.output))
     .pipe(uncss({
-        html: ['index.html']
+        html: [paths.build + '/index.html']
     }))
     .pipe(less({ compress: true }))
     .pipe(rename(paths.style.output_min))

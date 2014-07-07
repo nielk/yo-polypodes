@@ -79,9 +79,9 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
     this.mkdir(dir.src + '/common');
 
     // test
-    this.mkdir(dir.src + '/test');
-    this.mkdir(dir.src + '/test/visual'); // wraigth
-    this.mkdir(dir.src + '/test/unit'); // jasmine
+    this.mkdir(dir.base + '/test');
+    this.mkdir(dir.base + '/test/visual'); // wraith
+    this.mkdir(dir.base + '/test/unit'); // jasmine
   },
 
   copyMainFiles: function () {
@@ -113,6 +113,10 @@ var YoPolypodesGenerator = yeoman.generators.Base.extend({
     this.copy('__variables.less', dir.src + '/_variables.less');
     this.copy('_style.less', dir.src + '/style.less');
     this.copy('_footer.less', dir.src + '/blocks/footer/footer.less');
+
+    // test
+    this.copy('_config.yaml', dir.base + '/test/visual/configs/config.yaml');
+    this.copy('_snap.js', dir.base + '/test/visual/javascript/snap.js');
   },
 
 });
