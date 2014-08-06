@@ -51,7 +51,7 @@ var paths = {
         main                : './src/main.js'
     },
     style               : {
-        files               : ['./src/style.less', '!./src/less/_*.less'],
+        files               : ['./src/style.less'],
         watch               : ['./src/**/*.less', '!./src/vendor'],
         output              : 'style.css',
         output_min          : 'style.min.css',
