@@ -52,8 +52,7 @@ var paths = {
     style               : {
         files               : ['./src/style.less'],
         watch               : ['./src/**/*.less', '!./src/vendor'],
-        output              : 'style.css',
-        output_min          : 'style.min.css',
+        output              : './build/css/',
         dest                : './build/css'
     },
     layout                : {
@@ -104,7 +103,7 @@ gulp.task('clean', function () {
 gulp.task('style', function () {
     return gulp.src(paths.style.files)
     .pipe(plumber())
-    .pipe(less({ compress: true }))
+    .pipe(less({compress: true}))
     .pipe(gulp.dest(paths.style.output))
     .pipe(prefixer('last 5 versions', 'ie 8'))
     .pipe(browserSync.reload({stream:true}));
