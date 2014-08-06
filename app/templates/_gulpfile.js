@@ -19,7 +19,6 @@ var gulp = require('gulp'),
     // For less-css files
     less          = require('gulp-less'),
     prefixer      = require('gulp-autoprefixer'),
-    uncss         = require('gulp-uncss'),
 
     // For jade
     jade          = require('gulp-jade'),
@@ -105,16 +104,9 @@ gulp.task('clean', function () {
 gulp.task('style', function () {
     return gulp.src(paths.style.files)
     .pipe(plumber())
-    .pipe(less())
-    .pipe(prefixer('last 5 versions', 'ie 8'))
-    .pipe(gulp.dest(paths.style.dest))
-    .pipe(rename(paths.style.output))
-    .pipe(uncss({
-        html: [paths.build + '/index.html']
-    }))
     .pipe(less({ compress: true }))
-    .pipe(rename(paths.style.output_min))
-    .pipe(gulp.dest(paths.style.dest))
+    .pipe(gulp.dest(paths.style.output))
+    .pipe(prefixer('last 5 versions', 'ie 8'))
     .pipe(browserSync.reload({stream:true}));
     }
 );
